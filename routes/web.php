@@ -5,6 +5,8 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +19,7 @@ use App\Http\Controllers\HomeController;
 */
 
 // client route
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth.admin');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::prefix('categories')->group(function () {
     // Danh sách chuyên mục
     Route::get('/', [CategoriesController::class, 'index'])->name('categories.list');
@@ -25,7 +27,7 @@ Route::prefix('categories')->group(function () {
     //Lấy chi tiết một chuyên mục
     Route::get('/edit/{id}', [CategoriesController::class, 'getCategory'])->name('categories.edit');;
 
-    Route::post('', [CategoriesController::class, 'updateCategory']);
+    Route::post('/edit/{id}', [CategoriesController::class, 'updateCategory'])->name('categories');
 
     Route::get('/add', [CategoriesController::class, 'addCategory'])->name('categories.add');
 
@@ -34,9 +36,9 @@ Route::prefix('categories')->group(function () {
     Route::delete('/delete/{id}', [CategoriesController::class, 'deleteCategory']);
 });
 
-Route::get('san-pham/{id}', [HomeController::class, 'getProductDetail']);
+Route::get('products/{id}', [HomeController::class, 'getProductDetail']);
 
 Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
-    Route::resource('products', ProductsController::class)->middleware('auth.admin');
+    Route::middleware('auth.admin.product')->resource('products', ProductsController::class);
 });
