@@ -59,11 +59,60 @@
     @default
         <p>Số còn lại</p>
 @endswitch --}}
-
+{{-- 
 @for ($i = 1; $i <= 10; $i++)
     @if ($i==5)
         @continue
     @endif
     <p>Phần tử thứ: {{$i}}</p>   
-@endfor
+@endfor --}}
 
+
+
+{{-- @php
+    $number = 5;
+    if ($number >= 10) {
+        $total = $number + 20;
+    } else {
+        $total = $number + 10;
+    }
+    
+@endphp
+
+<h3>Kết quả {{$number}} - {{$total}}</h3> --}}
+{{-- @php
+    $total = 0;
+@endphp
+@for ($i = 0; $i < 10; $i++)
+@php
+    $total += $i;
+@endphp
+    <p>Phần tử: {{$i}}</p>
+@endfor
+<h3>Tổng: {{$total}}</h3> --}}
+{{-- <hr>
+<?php
+//for ($i=0; $i < 10; $i++) { 
+    //echo '<p>Phần tử: '.$i.'</p>';
+//}
+?> --}}
+{{-- 
+@php
+    // for ($i=0; $i < 10; $i++) { 
+    //     echo '<p>Phần tử: '.$i.'</p>';
+    // }
+@endphp --}}
+
+{{-- @verbatim
+<div class="container">
+    Hello, {{className}}
+</div>
+<script>
+    Hello, @{{name}}
+    Hi, {{age}}
+</script>
+@endverbatim --}}
+@php
+   // $message = 'Đặt hàng thành công';
+@endphp
+@include('parts.notice')

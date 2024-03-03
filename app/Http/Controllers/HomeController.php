@@ -20,6 +20,7 @@ class HomeController extends Controller
             // 'Item 3',
         ];
         $this->data['number']=3;
+        $this->data['message'] = 'Đặt hàng thành công';
         return view('home', $this->data);
     }
 }
