@@ -14,6 +14,8 @@ use App\Http\Controllers\Controller;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/san-pham', [HomeController::class, 'products']);
+Route::get('/san-pham', [HomeController::class, 'products'])->name('product');
+
+
