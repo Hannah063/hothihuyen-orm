@@ -15,10 +15,11 @@ class HomeController extends Controller
         <p>Kiến thức 3</p>';
         $this->data['index'] = 1;
         $this->data['dataArr'] = [
-            'Item 1',
-            'Item 2',
-            'Item 3',
+            // 'Item 1',
+            // 'Item 2',
+            // 'Item 3',
         ];
+        $this->data['number']=3;
         return view('home', $this->data);
     }
 }
