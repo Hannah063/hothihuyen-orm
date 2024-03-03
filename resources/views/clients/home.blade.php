@@ -1,4 +1,4 @@
-<h1>Trang chủ Unicode</h1>
+{{-- <h1>Trang chủ Unicode</h1>
 <!-- <h2>{{$welcome}}</h2> -->
 <!-- <h2><?php
     echo request()->keyword;
@@ -112,7 +112,39 @@
     Hi, {{age}}
 </script>
 @endverbatim --}}
-@php
+{{-- @php
    // $message = 'Đặt hàng thành công';
 @endphp
-@include('parts.notice')
+@include('parts.notice')  --}}
+
+@extends('layouts.client')
+@section('title')
+    {{$title}}
+@endsection
+
+@section('sidebar')
+    {{-- @parent --}}
+    <h3>Home Sidebar</h3>
+@endsection
+
+@section('content')
+    <h1>TRANG CHỦ</h1>
+    <button type="button" class="show">Show</button>
+@endsection
+
+@section('css')
+    <style>
+        header{
+            background: blue;
+            color: #fff;
+        }
+    </style>
+@endsection
+
+@section('js')
+    <script>
+        document.querySelector('.show').onclick = function(){
+            alert('Thành công');
+        }
+    </script>
+@endsection
