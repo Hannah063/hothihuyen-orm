@@ -18,4 +18,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/san-pham', [HomeController::class, 'products'])->name('product');
 
+Route::get('/them-san-pham', [HomeController::class, 'getAdd']);
 
+//Route::post('/them-san-pham', [HomeController::class, 'postAdd']);
+
+Route::put('/them-san-pham', [HomeController::class, 'putAdd']);
