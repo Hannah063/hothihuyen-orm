@@ -23,7 +23,8 @@ class HomeController extends Controller
         // $this->data['message'] = 'Đặt hàng thành công';
 
         $this->data['title'] = 'Đào tạo lập trình web';
-
+        $this->data['message'] = 'Đăng ký tài khoản thành công';
+        
         return view('clients.home', $this->data);
     }
 

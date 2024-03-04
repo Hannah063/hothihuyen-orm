@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\View\Components\Alert;
+// use App\View\Components\Inputs\Button;
+// use App\View\Components\Forms\Button as FormButton;
 use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Support\Facades\Blade;
@@ -28,5 +31,10 @@ class AppServiceProvider extends ServiceProvider
             }
             return false;
         });
+
+        Blade::component('package-alert', Alert::class);
+        // Blade::component('button', Button::class);
+        // Blade::component('forms-button', FormButton::class);
+
     }
 }
