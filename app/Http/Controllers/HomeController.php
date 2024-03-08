@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class HomeController extends Controller
 {
     public $data = [];
@@ -24,7 +24,13 @@ class HomeController extends Controller
 
         $this->data['title'] = 'Đào tạo lập trình web';
         $this->data['message'] = 'Đăng ký tài khoản thành công';
-        
+        // return 'Unicode';
+        // $users = DB::select('SELECT * FROM users WHERE id > ?', [1]);
+        // $users = DB::select('SELECT * FROM users WHERE email=:email', [
+        //     'email' => 'huyen.hothi25@student.passerellesnumeriques.org'
+        // ]);
+
+        // dd($users);
         return view('clients.home', $this->data);
     }
 
