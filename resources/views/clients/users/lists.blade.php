@@ -4,6 +4,10 @@
 @endsection
 
 @section('content')
+    @if (session('msg'))
+        <div class="alert alert-success">{{session('msg')}}</div>
+    @endif
+
     <h1>{{$title}}</h1>
     <a href="{{route('users.add')}}" class="btn btn-primary">Thêm người dùng</a>
     <hr />
@@ -14,6 +18,8 @@
                 <th>Tên</th>
                 <th>Email</th>
                 <th width='15%'>Thời gian</th>
+                <th width='5%'>Sửa</th>
+                <th width='5%'>Xoá</th>
             </tr>
         </thead>
         <tbody>
@@ -24,11 +30,17 @@
                         <td>{{$item->fullname}}</td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->create_at}}</td>
+                        <td>
+                            <a href="{{route('users.edit', ['id'=>$item->id])}}" class="btn btn-warning btn-sm">Sửa</a>
+                        </td>
+                        <td>
+                            <a href="" class="btn btn-danger btn-sm">Sửa</a>
+                        </td>
                     </tr>
                 @endforeach
             @else
                 <tr>
-                    <td colspan="4">Không có người dùng</td>
+                    <td colspan="6">Không có người dùng</td>
                 </tr>
             @endif
         </tbody>
