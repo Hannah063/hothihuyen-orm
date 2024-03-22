@@ -15,9 +15,9 @@ class UsersController extends Controller
     }
 
     public function index(){
-        $statement = $this->users->statementUser("DELETE FROM users");
-        dd($statement);
+        // $statement = $this->users->statementUser("DELETE FROM users");
         $title = 'Danh sách người dùng';
+        $this->users->learnQueryBuilder();
         $usersList = $this->users->getAllUsers();
         return view('clients.users.lists', compact('title', 'usersList'));
     }

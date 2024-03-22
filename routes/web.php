@@ -25,7 +25,6 @@ Route::get('/them-san-pham', [HomeController::class, 'getAdd']);
 
 Route::put('/them-san-pham', [HomeController::class, 'putAdd']);
 
-
 Route::prefix('users')->name('users.')->group(function(){
     Route::get('/', [UsersController::class, 'index'])->name('index');
     Route::get('/add', [UsersController::class, 'add'])->name('add');
@@ -34,5 +33,4 @@ Route::prefix('users')->name('users.')->group(function(){
     Route::post('/update', [UsersController::class, 'postEdit'])->name('post-edit');
     Route::get('/delete/{id}', [UsersController::class, 'delete'])->name('delete');
     Route::post('/delete', [UsersController::class, 'postDelete'])->name('post-delete');
-
 });

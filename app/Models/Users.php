@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+use function Laravel\Prompts\select;
+
 class Users extends Model
 {
     use HasFactory;
@@ -36,5 +38,47 @@ class Users extends Model
 
     public function statementUser($sql){
         return DB::statement($sql);
+    }
+
+    public function learnQueryBuilder(){
+        //get all record
+        // $lists = DB::table($this->table)->get();
+
+        //get first record
+        $detail = DB::table($this->table)->first();
+
+        //get thong tin nhat dinh, neu muon get all thi select *
+        // $lists = DB::table($this->table)->select('email', 'fullname as hoten')->get();
+
+        //get theo dieu kien, có thể có nhiều điều kiện
+        $lists = DB::table($this->table)
+        ->select('email', 'fullname as hoten')
+        // =
+        // ->where('id', 9)
+
+        //> < <>
+        // ->where('id','>', 9)
+
+        //and
+        // ->where([
+        //     [
+        //         'id', '>', 2
+        //     ],
+        //     [
+        //         'id', '<', 4
+        //     ]
+        // ])
+
+        //or
+        ->where('id','>', 9)
+        ->orWhere('id', 9)
+
+        ->get();
+
+        //all infomation
+        dd($lists);
+
+        //detail infomation
+        // dd($detail->email);
     }
 }
