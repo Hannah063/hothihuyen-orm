@@ -121,17 +121,39 @@ class Users extends Model
         // ])
 
         $lists = DB::table('users')
-        ->select('users.*', 'groups.name as group_name')
+        // ->select('users.*', 'groups.name as group_name')
 
         //NỐI BẢNG JOIN
             //INNER JOIN
             // ->join('groups', 'users.group_id', '=', 'groups.id')
             //LEFT JOIN
-            ->leftJoin('groups', 'users.group_id', '=', 'groups.id')
+            // ->leftJoin('groups', 'users.group_id', '=', 'groups.id')
             //RIGHT JOIN
-            ->rightJoin('groups', 'users.group_id', '=', 'groups.id')
+            // ->rightJoin('groups', 'users.group_id', '=', 'groups.id')
 
-            ->get();
+        //Sắp xếp orderBy
+            //sắp xếp 1 cột
+            // ->orderBy('id', 'desc')
+            //sắp xếp nhiều cột
+            // ->orderBy('id', 'desc')
+            // ->orderBy('create_at', 'asc')
+            //sắp xếp ngẫu nhiên
+            // ->inRandomOrder()
+
+        //Truy vấn theo nhóm groupBy having
+        // ->select(DB::raw('count(id) as email_count'), 'email', 'fullname')
+        // ->groupBy('email')
+        // ->groupBy('fullname')
+        // ->having('email_count', '>=', 2)
+
+        //Giới hạn limit offset
+            //offset loại bỏ đi một số bản ghi mà không muốn hiển thị
+            // ->limit(2)
+            // ->offset(1)//bỏ qua n bản ghi đầu
+            //skip take, giống nhau
+            ->skip(2)
+            ->take(2)
+        ->get();
         //debug
         // ->toSql();
 
