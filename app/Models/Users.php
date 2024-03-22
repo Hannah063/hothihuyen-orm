@@ -41,9 +41,9 @@ class Users extends Model
     }
 
     public function learnQueryBuilder(){
-        DB::enableQueryLog();
+        // DB::enableQueryLog();
 
-        $id = 9;
+        // $id = 9;
 
         //get all record
         // $lists = DB::table($this->table)->get();
@@ -52,11 +52,11 @@ class Users extends Model
         // $lists = DB::table($this->table)->select('email', 'fullname as hoten')->get();
 
         //get first record
-        $detail = DB::table($this->table)->first();
+        // $detail = DB::table($this->table)->first();
 
         //get theo dieu kien, có thể có nhiều điều kiện
-        $lists = DB::table($this->table)
-        ->select('email', 'fullname as hoten', 'id')
+        // $lists = DB::table($this->table)
+        // ->select('*')
         // =
         // ->where('id', 9)
 
@@ -97,8 +97,41 @@ class Users extends Model
         // ->whereNull('update_at')
         // ->whereNotNull('update_at')
 
-        ->get();
+        //truy vấn Date
+        // ->whereDate('update_at', '2024-03-21')
 
+        //month
+        // ->whereMonth('create_at', '03')
+
+        //day
+        // ->whereDay('create_at', '08')
+
+        //year
+        // ->whereYear('create_at', '2024')
+
+        //TRUY VẤN GIÁ TRỊ CỘT
+            //2 cột bằng nhau
+        //->whereColumn('create_at', 'update_at')
+            //toán tử so sánh
+        // ->whereColumn('create_at','>','update_at')
+            //kết hợp điều kiện and
+        // ->whereColumn([
+        //     ['create_at','>','update_at'],
+        //     ['name','=','fullname']
+        // ])
+
+        $lists = DB::table('users')
+        ->select('users.*', 'groups.name as group_name')
+
+        //NỐI BẢNG JOIN
+            //INNER JOIN
+            // ->join('groups', 'users.group_id', '=', 'groups.id')
+            //LEFT JOIN
+            ->leftJoin('groups', 'users.group_id', '=', 'groups.id')
+            //RIGHT JOIN
+            ->rightJoin('groups', 'users.group_id', '=', 'groups.id')
+
+            ->get();
         //debug
         // ->toSql();
 
