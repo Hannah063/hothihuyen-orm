@@ -41,18 +41,22 @@ class Users extends Model
     }
 
     public function learnQueryBuilder(){
+        DB::enableQueryLog();
+
+        $id = 9;
+
         //get all record
         // $lists = DB::table($this->table)->get();
-
-        //get first record
-        $detail = DB::table($this->table)->first();
 
         //get thong tin nhat dinh, neu muon get all thi select *
         // $lists = DB::table($this->table)->select('email', 'fullname as hoten')->get();
 
+        //get first record
+        $detail = DB::table($this->table)->first();
+
         //get theo dieu kien, có thể có nhiều điều kiện
         $lists = DB::table($this->table)
-        ->select('email', 'fullname as hoten')
+        ->select('email', 'fullname as hoten', 'id')
         // =
         // ->where('id', 9)
 
@@ -69,11 +73,36 @@ class Users extends Model
         //     ]
         // ])
 
-        //or
-        ->where('id','>', 9)
-        ->orWhere('id', 9)
+        //kết hợp điều kiện and or
+        // ->where('id','>', 9)
+        // ->orWhere('id', 9)
+        // ->where('id', 10)
+        // ->where(function ($query) use ($id) {
+        //     $query->where('id','>', $id)->orWhere('id', $id);
+        // })
+
+        // ->where('fullname', 'like', 'Hồ Thị Hoa')
+
+        //truy vấn trong khoảng
+        // ->whereBetween('id', [9, 10])
+
+        //truy vấn ngoài khoảng
+        // ->whereNotBetween('id', [9, 10])
+
+        //truy vấn toán tử IN
+        // ->whereIn('id', [9, 10])
+        // ->whereNotIn('id', [9, 10])
+
+        //NULL
+        // ->whereNull('update_at')
+        // ->whereNotNull('update_at')
 
         ->get();
+
+        //debug
+        // ->toSql();
+
+        // dd(DB::getQueryLog());
 
         //all infomation
         dd($lists);
