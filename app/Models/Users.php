@@ -120,7 +120,7 @@ class Users extends Model
         //     ['name','=','fullname']
         // ])
 
-        $lists = DB::table('users')
+        // $lists = DB::table('users')
         // ->select('users.*', 'groups.name as group_name')
 
         //NỐI BẢNG JOIN
@@ -151,16 +151,57 @@ class Users extends Model
             // ->limit(2)
             // ->offset(1)//bỏ qua n bản ghi đầu
             //skip take, giống nhau
-            ->skip(2)
-            ->take(2)
-        ->get();
+        //     ->skip(2)
+        //     ->take(2)
+        // ->get();
         //debug
         // ->toSql();
 
         // dd(DB::getQueryLog());
 
+        //INSERT
+        // $status = DB::table('users')->insert([
+        //     'fullname' => 'Nguyễn Văn A',
+        //     'email' => 'nguyenvana@gmail.com',
+        //     'group_id' => 1,
+        //     'create_at' =>  date('Y-m-d H:i:s')
+        // ]);
+
+        //dd($status);
+
+        //LẤY ID SAU KHI INSERT
+        //$lastId = DB::getPdo()->lastInsertId();
+
+        // $lastId = DB::table('users')->insertGetId([
+        //     'fullname' => 'Nguyễn Văn A',
+        //     'email' => 'nguyenvana@gmail.com',
+        //     'group_id' => 1,
+        //     'create_at' =>  date('Y-m-d H:i:s')
+        // ]);
+
+        //dd($lastId);
+
+        //CẬP NHẬT BẢN GHI
+        // $status = DB::table('users')
+        // ->where('id', 14)
+        // ->update([
+        //     'fullname' => 'Nguyễn Văn B',
+        //     'email' => 'nguyenvanb@gmail.com',
+        //     'update_at' =>  date('Y-m-d H:i:s')
+        // ]);
+
+        //XOÁ
+        // $status = DB::table('users')
+        // ->where('id', 14)
+        // ->delete();
+
+        //ĐẾM SỐ BẢN GHI
+        $count = DB::table('users')->where('id', '>', 9)->count();
+
+        dd($count);
+
         //all infomation
-        dd($lists);
+        // dd($lists);
 
         //detail infomation
         // dd($detail->email);
