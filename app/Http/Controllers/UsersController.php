@@ -36,8 +36,30 @@ class UsersController extends Controller
         if (!empty($request->keywords)) {
             $keywords = $request->keywords;
         }
-        $usersList = $this->users->getAllUsers($filters, $keywords);
-        return view('clients.users.lists', compact('title', 'usersList'));
+
+        //xử lý logic sắp xếp
+        $sortBy = $request->input('sort-by');
+        $sortType = $request->input('sort-type');
+
+        $allowSort = ['asc', 'desc'];
+
+        if (!empty($sortType) && in_array($sortType, $allowSort)) {
+            if ($sortType == 'desc') {
+                $sortType = 'asc';
+            } else {
+                $sortType = 'desc';
+            }
+        }else{
+            $sortType = 'asc';
+        }
+
+        $sortArray = [
+            'sortBy' => $sortBy,
+            'sortType' => $sortType
+        ];
+
+        $usersList = $this->users->getAllUsers($filters, $keywords, $sortArray);
+        return view('clients.users.lists', compact('title', 'usersList', 'sortType'));
     }
 
     public function add() {
@@ -59,7 +81,10 @@ class UsersController extends Controller
         $dataInsert = [
             $request->fullname,
             $request->email,
-            date('Y-m-d H:i:s')
+            1,
+            1,
+            date('Y-m-d H:i:s'),
+
         ];
         $this->users->addUser($dataInsert);
 
