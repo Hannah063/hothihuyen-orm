@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Users;
 
@@ -71,7 +72,7 @@ class UsersController extends Controller
         return view('clients.users.add', compact('title', 'allGroups'));
     }
 
-    public function postAdd(Request $request) {
+    public function postAdd(UserRequest $request) {
         $request->validate([
             'fullname' => 'required|min:5',
             'email' => 'required|email|unique:users',
@@ -118,34 +119,28 @@ class UsersController extends Controller
         }else {
             return redirect()->route('users.index')->with('msg', 'Liên kết không tồn tại');
         }
-        return view('clients.users.edit', compact('title', 'userDetail'));
+        $allGroups = getAllGroups();
+        return view('clients.users.edit', compact('title', 'userDetail', 'allGroups'));
     }
 
-    public function postEdit(Request $request, $id=0){
+    public function postEdit(UserRequest $request, $id=0){
         $id = session('id');
         if (empty($id)) {
             return back()->with('msg', 'Liên kết không tồn tại');
         }
-        $request->validate([
-            'fullname' => 'required|min:5',
-            'email' => 'required|email|unique:users,email,'.$id
-        ], [
-            'fullname.required' => 'Họ và tên bắt buộc phải nhập',
-            'fullname.min' => 'Họ và tên phải từ :min ký tự trở lên',
-            'email.required' => 'Email bắt buộc phải nhập',
-            'email.email' => 'Email không đúng định dạng',
-            'email.unique' => 'Email đã tồn tại trên hệ thống'
-        ]);
-
+        
         $dataUpdate = [
-            $request->fullname,
-            $request->email,
-            date('Y-m-d H:i:s')
+            'fullname' => $request->fullname,
+            'email' => $request->email,
+            'group_id' => $request->group_id,
+            'status' => $request->status,
+            'update_at' => date('Y-m-d H:i:s'),
+
         ];
 
         $this->users->updateUser($dataUpdate, $id);
 
-        return back()->with('msg', 'Cập nhật người dùng');
+        return back()->with('msg', 'Cập nhật người dùng thành công');
     }
 
     public function delete(Request $request, $id=0){
