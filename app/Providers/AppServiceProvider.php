@@ -8,6 +8,7 @@ use App\View\Components\Alert;
 use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('package-alert', Alert::class);
         // Blade::component('button', Button::class);
         // Blade::component('forms-button', FormButton::class);
-
+        Paginator::useBootstrap();
     }
 }

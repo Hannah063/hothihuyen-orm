@@ -9,6 +9,9 @@ use App\Models\Users;
 class UsersController extends Controller
 {
     private $users;
+
+    const _PER_PAGE = 3;
+
     public function __construct()
     {
         $this->users = new Users();
@@ -58,7 +61,7 @@ class UsersController extends Controller
             'sortType' => $sortType
         ];
 
-        $usersList = $this->users->getAllUsers($filters, $keywords, $sortArray);
+        $usersList = $this->users->getAllUsers($filters, $keywords, $sortArray, self::_PER_PAGE);
         return view('clients.users.lists', compact('title', 'usersList', 'sortType'));
     }
 
