@@ -14,8 +14,24 @@ class Users extends Model
 
     protected $table = 'users';
 
-    public function getAllUsers(){
-        $users = DB::select('SELECT * FROM users ORDER BY create_at DESC');
+    public function getAllUsers($filters, $keywords = null){
+        //$users = DB::select('SELECT * FROM users ORDER BY create_at DESC');
+        $users = DB::table($this->table)
+        ->select('users.*', 'groups.name as group_name')
+        ->join('groups', 'users.group_id', '=', 'groups.id')
+        ->orderBy('users.create_at', 'DESC');
+
+        if (!empty($filters)) {
+            $users = $users->where($filters);
+        }
+
+        if (!empty($keywords)) {
+            $users = $users->where(function($query) use ($keywords){
+                $query->orWhere('fullname', 'like', '%'.$keywords.'%');
+                $query->orWhere('email', 'like', '%'.$keywords.'%');
+            });
+        }
+        $users = $users->get();
         return $users;
     }
 

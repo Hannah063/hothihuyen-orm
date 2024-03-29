@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('assets/clients/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/clients/css/style.css')}}">
-    
+
     @yield('css')
 </head>
 <body>
@@ -16,14 +16,14 @@
     <main class="py-5">
         <div class="container">
             <div class="row">
-                <div class="col-4">
+                <div class="col-3">
                     <aside>
                         @section('sidebar')
-                            @include('clients.blocks.sidebar') 
+                            @include('clients.blocks.sidebar')
                         @show
                     </aside>
                 </div>
-                <div class="col-8">
+                <div class="col-9">
                     <div class="content">
                         @yield('content')
                     </div>
