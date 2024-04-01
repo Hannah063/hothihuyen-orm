@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 /*
@@ -33,4 +34,9 @@ Route::prefix('users')->name('users.')->group(function(){
     Route::post('/update', [UsersController::class, 'postEdit'])->name('post-edit');
     Route::get('/delete/{id}', [UsersController::class, 'delete'])->name('delete');
     Route::post('/delete', [UsersController::class, 'postDelete'])->name('post-delete');
+});
+
+Route::prefix('posts')->name('posts.')->group(function(){
+    Route::get('/', [PostController::class, 'index'])->name('index');
+    
 });
